@@ -4,9 +4,26 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class FileManager {
+    public FileManager() {
+        // Configurar los detalles de la conexión a la base de datos
+        String url = "jdbc:mysql://localhost:3306/editor_texto";
+        String username = "root";
+        String password = "";
+
+        try {
+            // Establecer la conexión
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Conectado a la base de datos");
+        } catch (SQLException e) {
+            System.out.println("Error al conectarse a la base de datos: " + e.getMessage());
+        }
+    }
     public void createNewFile(String fileName) {
         try {
             File file = new File(fileName);
